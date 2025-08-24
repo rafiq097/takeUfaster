@@ -1,4 +1,4 @@
-import data from "@/data/sde_sheet.json";
+import data from "@/data/a2z_sheet.json";
 
 export default function Home() {
   return (
