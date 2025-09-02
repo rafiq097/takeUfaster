@@ -1,12 +1,38 @@
-import data from "@/data/sde_sheet.json";
+"use client"
+import { useState, useEffect } from "react";
+//import data from "@/data/sde_sheet.json";
 
 export default function Home() {
+  const [data, setData] = useState([]);
+  const [sheet, setSheet] = useState("79");
+  
+  useEffect(() => {
+    async function fetchData() {
+        if(sheet)
+        {
+            const res = await fetch(`./data/${sheet}_sheet.json`);
+            console.log(res);
+            setData(res || []);
+        }
+    }
+    
+    fetchData();
+  }, [sheet]);
+  
   return (
+  <>
+    <div>
+        <select onChange={(e) => setSheet(e.target.value)}>
+            <option value="79">79</option>
+            <option value="sde">SDE</option>
+            <option value="a2z">AtoZ</option>
+        </select>
+    </div>
     <main className="p-6">
-      <h1 className="text-center text-red-600 text-3xl font-bold mb-6">DSA Sheet</h1>
+      <h1 className="text-center text-red-600 text-3xl font-bold mb-6">{sheet} Sheet</h1>
 
       <section>
-        {data.map((step, stepIndex) => (
+        {data?.map((step, stepIndex) => (
           <article key={step.step_no} className="mb-8 border-b pb-4">
             <h2 className="text-2xl font-semibold italic text-blue-700 mb-2">
               {step.step_no}. {step.head_step_no}
@@ -66,6 +92,7 @@ export default function Home() {
         ))}
       </section>
     </main>
+   </>
   );
 }
 
