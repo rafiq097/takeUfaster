@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
+import axios from "axios";
 //import data from "@/data/sde_sheet.json";
 
 export default function Home() {
@@ -10,9 +11,10 @@ export default function Home() {
     async function fetchData() {
         if(sheet)
         {
-            const res = await fetch(`./data/${sheet}_sheet.json`);
-            console.log(res);
-            setData(res || []);
+            const res = await fetch(`http://localhost:3000/data/${sheet}_sheet.json`)
+            const temp = await res.json();
+            console.log(temp);
+            setData(temp || []);
         }
     }
     
@@ -32,6 +34,7 @@ export default function Home() {
       <h1 className="text-center text-red-600 text-3xl font-bold mb-6">{sheet} Sheet</h1>
 
       <section>
+        {console.log(data)}
         {data?.map((step, stepIndex) => (
           <article key={step.step_no} className="mb-8 border-b pb-4">
             <h2 className="text-2xl font-semibold italic text-blue-700 mb-2">
