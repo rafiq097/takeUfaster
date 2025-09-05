@@ -11,7 +11,7 @@ export default function Home() {
     async function fetchData() {
       if (sheet) {
         const res = await fetch(
-          `http://localhost:3000/data/${sheet}_core.json`
+          `/data/${sheet}_core.json`
         );
         const temp = await res.json();
         console.log(temp);
