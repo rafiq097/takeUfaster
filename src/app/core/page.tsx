@@ -51,6 +51,9 @@ export default function Home() {
                     <h3 className="text-xl font-medium text-gray-800 mb-2">
                       {step.step_no}.{topic.sl_no_in_step} -- {topic.title}
                     </h3>
+                    <div
+                        dangerouslySetInnerHTML={{ __html: topic.content }}
+                    ></div>
                   </div>
                 );
               })}
