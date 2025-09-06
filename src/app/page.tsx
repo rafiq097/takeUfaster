@@ -10,9 +10,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       if (sheet) {
-        const res = await fetch(
-          `/data/${sheet}_sheet.json`
-        );
+        const res = await fetch(`/data/${sheet}_sheet.json`);
         const temp = await res.json();
         console.log(temp);
         setData(temp || []);
