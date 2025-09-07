@@ -185,17 +185,6 @@ export default function Home() {
                                     {item.post_link}
                                   </a>
                                 </li>
-                                <li>
-                                  <strong>Plus Link:</strong>{" "}
-                                  <a
-                                    href={item.plus_link}
-                                    className="text-purple-600 underline"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {item.plus_link}
-                                  </a>
-                                </li>
                               </ul>
 
                               {parsedTopics?.length > 0 && (
