@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col justify-center align-items">
-        <button onClick={() => router.push("/dsa")} className="flex justify-center">DSA</button>
+        <button onClick={() => router.push("/dsa")} className="flex justify-content">DSA</button>
         <button onClick={() => router.push("/core")} className="flex justify-center">Core</button>
       </div>
     </>
