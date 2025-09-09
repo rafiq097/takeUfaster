@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function Home() {
   const [data, setData] = useState([]);
-  const [sheet, setSheet] = useState("cn");
+  const [sheet, setSheet] = useState("os");
   const [open, setOpen] = useState([]);
 
   useEffect(() => {
@@ -24,9 +24,9 @@ export default function Home() {
     <>
       <div>
         <select onChange={(e) => setSheet(e.target.value)}>
-          <option value="cn">CN</option>
           <option value="os">OS</option>
           <option value="dbms">DBMS</option>
+          <option value="cn">CN</option>
         </select>
       </div>
       <main className="p-6">
