@@ -1,10 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "next/navigation";
 
 export default function Home() {
+  const params = useParams();
+  const { slug } = params;
+   
   const [data, setData] = useState([]);
-  const [sheet, setSheet] = useState("os");
+  const [sheet, setSheet] = useState(slug);
   const [open, setOpen] = useState([]);
 
   useEffect(() => {

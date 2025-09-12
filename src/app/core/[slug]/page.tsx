@@ -26,13 +26,6 @@ export default function Home() {
 
   return (
     <>
-      <div>
-        <select onChange={(e) => setSheet(e.target.value)}>
-          <option value="os">OS</option>
-          <option value="dbms">DBMS</option>
-          <option value="cn">CN</option>
-        </select>
-      </div>
       <main className="p-6">
         <h1 className="text-center text-red-600 text-3xl font-bold mb-6">
           {sheet.toUpperCase()} Sheet

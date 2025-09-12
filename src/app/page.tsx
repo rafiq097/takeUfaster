@@ -22,7 +22,7 @@ export default function Home() {
   const dsaSheets = [
     { name: "79 Sheet", description: "Essential 79 coding problems", problems: 79, slug: "79" },
     { name: "SDE Sheet", description: "Software Development Engineer prep", problems: 191, slug: "sde" },
-    { name: "A to Z DSA", description: "Complete DSA roadmap", problems: 450, slug: "atoz" }
+    { name: "A to Z DSA", description: "Complete DSA roadmap", problems: 450, slug: "a2z" }
   ];
 
   const coreSubjects = [
