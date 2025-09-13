@@ -1,21 +1,28 @@
 "use client";
 import { useState, useEffect } from "react";
-import axios from "axios";
-//import data from "@/data/sde_sheet.json";
-import { useParams } from 'next/navigation';
+import { ChevronDown, ChevronRight } from "lucide-react";
+import { useParams } from "next/navigation";
+
+// Logos (you can replace these emojis with SVGs if needed)
+const Logos = {
+  lc: "💻", // LeetCode logo placeholder
+  gfg: "🟢", // GFG
+  cs: "🔵", // CodingNinjas
+  plus: "🐧", // Penguin for LeetCode+
+};
 
 export default function Home() {
   const params = useParams();
   const { slug } = params;
-  
+
   const [data, setData] = useState([]);
   const [sheet, setSheet] = useState(slug);
   const [open, setOpen] = useState({});
-  
+
   const toggle = (id) => {
     setOpen((prev) => ({
-        ...prev,
-        [id]: !prev[id]
+      ...prev,
+      [id]: !prev[id],
     }));
   };
 
@@ -24,234 +31,341 @@ export default function Home() {
       if (sheet) {
         const res = await fetch(`/data/${sheet}_sheet.json`);
         const temp = await res.json();
-        console.log(temp);
         setData(temp || []);
       }
     }
-
     fetchData();
   }, [sheet]);
 
   return (
-    <>
-      <main className="p-6">
-        <h1 className="text-center text-red-600 text-3xl font-bold mb-6">
-          {sheet.toUpperCase()} Sheet
-        </h1>
+    <div className="min-h-screen bg-black text-white">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-2">
+            {sheet?.toUpperCase()} Sheet
+          </h1>
+          <p className="text-blue-300 text-lg">
+            Master Data Structures & Algorithms
+          </p>
+        </div>
 
-        <section>
-          {console.log(data)}
+        {/* Sheet Content */}
+        <div className="space-y-6">
           {data?.map((step, stepIndex) => (
-            <article key={step.step_no} className="mb-8 border-b pb-4" onClick={() => toggle(step.step_no)}>
-              <h2 className="text-2xl font-semibold italic text-blue-700 mb-2">
-                {step.step_no}.{" "}
-                {sheet == "a2z" ? step.step_title : step.head_step_no}
-              </h2>
+            <div
+              key={step.step_no}
+              className="bg-black rounded-xl shadow-md border border-blue-900 overflow-hidden"
+            >
+              {/* Step Header */}
+              <div
+                className="p-5 bg-black cursor-pointer hover:bg-blue-950 transition-colors"
+                onClick={() => toggle(step.step_no)}
+              >
+                <div className="flex items-center justify-between">
+                  <h2 className="text-2xl font-bold">
+                    <span className="text-blue-500">{step.step_no}.</span>{" "}
+                    {sheet === "a2z" ? step.step_title : step.head_step_no}
+                  </h2>
+                  {open[step.step_no] ? (
+                    <ChevronDown className="w-6 h-6 text-blue-400" />
+                  ) : (
+                    <ChevronRight className="w-6 h-6 text-blue-400" />
+                  )}
+                </div>
+              </div>
 
-              {open[`${step.step_no}`] && (
-              <>
-              {sheet != "a2z"
-                ? step?.topics?.map((topic, topicIndex) => {
-                    let parsedTopics = [];
-
-                    try {
-                      parsedTopics = JSON.parse(topic.ques_topic);
-                    } catch (error) {
-                      console.error("Error parsing ques_topic:", error);
-                    }
-
-                    return (
-                      <div
-                        key={`${step.step_no}-${topicIndex}`}
-                         onClick={(e) => {
-                            e.stopPropagation();
-                            toggle(`${step.step_no}-${topicIndex}`)
-                         }}
-                        className="mb-4 p-4 bg-gray-50 rounded-md shadow"
-                      >
-                        <h3
-                         className="text-xl font-medium text-gray-800 mb-2">
-                          {topic.title}
-                        </h3>
-
-                        {open[`${step.step_no}-${topicIndex}`] && (
-                        <>
-                        <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1">
-                          <li>
-                            <strong>LC Link:</strong>{" "}
-                            <a
-                              href={topic.lc_link}
-                              className="text-blue-600 underline"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {topic.lc_link}
-                            </a>
-                          </li>
-                          <li>
-                            <strong>GFG Link:</strong>{" "}
-                            <a
-                              href={topic.gfg_link}
-                              className="text-green-600 underline"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {topic.gfg_link}
-                            </a>
-                          </li>
-                          <li>
-                            <strong>CS Link:</strong>{" "}
-                            <a
-                              href={topic.cs_link}
-                              className="text-purple-600 underline"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {topic.cs_link}
-                            </a>
-                          </li>
-                        </ul>
-
-                        {parsedTopics?.length > 0 && (
-                          <div className="mt-2">
-                            <strong>Topics:</strong>
-                            <ul className="list-disc pl-5 text-sm text-gray-600 mt-1">
-                              {parsedTopics.map((t, idx) => (
-                                <li key={idx}>{t.label}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                        </>
-                        )}
+              {/* Step Content */}
+              {open[step.step_no] && (
+                <div className="p-5">
+                  {sheet !== "a2z" ? (
+                    // Regular sheet format
+                    <div className="overflow-hidden rounded-lg">
+                      {/* Table Header */}
+                      <div className="grid grid-cols-6 gap-4 p-3 text-sm font-semibold border-b border-blue-900">
+                        <div>Name</div>
+                        <div>Article</div>
+                        <div>GFG</div>
+                        <div>CN</div>
+                        <div>LC</div>
+                        <div>Topics</div>
                       </div>
-                    );
-                  })
-                : step?.sub_steps?.map((topic, topicIndex) => {
-                    return (
-                      <div
-                        key={`${step.step_no}-${topicIndex}`}
-                         onClick={(e) => {
-                            e.stopPropagation();
-                            toggle(`${step.step_no}-${topicIndex}`)
-                         }}
-                        className="mb-4 p-4 bg-gray-50 rounded-md shadow"
-                      >
-                        <h3 className="text-xl font-medium text-gray-800 mb-2">
-                          {step.step_no}.{topic.sub_step_no} -{" "}
-                          {topic.sub_step_title}
-                        </h3>
-
-                        {open[`${step.step_no}-${topicIndex}`] && (
-                        <>
-                        {topic?.topics?.map((item, itemIndex) => {
+                      {/* Table Rows */}
+                      <div>
+                        {step?.topics?.map((topic, topicIndex) => {
                           let parsedTopics = [];
-
                           try {
-                            parsedTopics = JSON.parse(item.ques_topic);
+                            parsedTopics = JSON.parse(topic.ques_topic);
                           } catch (error) {
                             console.error("Error parsing ques_topic:", error);
                           }
 
                           return (
                             <div
-                              key={`${step.step_no}-${itemIndex}`}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                toggle(`${step.step_no}-${topicIndex}-${itemIndex}`)
-                              }}
-                              className="mb-4 p-4 bg-gray-50 rounded-md shadow"
+                              key={`${step.step_no}-${topicIndex}`}
+                              className="grid grid-cols-6 gap-4 p-3 text-sm hover:bg-blue-950 transition-colors"
                             >
-                              <h3 className="text-xl font-medium text-gray-800 mb-2">
-                                {item.question_title}
-                              </h3>
+                              {/* Problem Name */}
+                              <div className="font-medium">{topic.title}</div>
 
-                              {open[`${step.step_no}-${topicIndex}-${itemIndex}`] && (
-                              <>
-                              <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1">
-                                <li>
-                                  <strong>LC Link:</strong>{" "}
+                              {/* Article */}
+                              <div>
+                                {topic.post_link ? (
                                   <a
-                                    href={item.lc_link}
-                                    className="text-blue-600 underline"
+                                    href={topic.post_link}
+                                    className="hover:underline"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                   >
-                                    {item.lc_link}
+                                    📄
                                   </a>
-                                </li>
-                                <li>
-                                  <strong>GFG Link:</strong>{" "}
-                                  <a
-                                    href={item.gfg_link}
-                                    className="text-green-600 underline"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {item.gfg_link}
-                                  </a>
-                                </li>
-                                <li>
-                                  <strong>CS Link:</strong>{" "}
-                                  <a
-                                    href={item.cs_link}
-                                    className="text-purple-600 underline"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {item.cs_link}
-                                  </a>
-                                </li>
-                                <li>
-                                  <strong>Post Link:</strong>{" "}
-                                  <a
-                                    href={item.post_link}
-                                    className="text-purple-600 underline"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {item.post_link}
-                                  </a>
-                                </li>
-                                <li>
-                                  <strong>Plus Link:</strong>{" "}
-                                  <a
-                                    href={item.plus_link}
-                                    className="text-purple-600 underline"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {item.plus_link}
-                                  </a>
-                                </li>
-                              </ul>
+                                ) : (
+                                  "-"
+                                )}
+                              </div>
 
-                              {parsedTopics?.length > 0 && (
-                                <div className="mt-2">
-                                  <strong>Topics:</strong>
-                                  <ul className="list-disc pl-5 text-sm text-gray-600 mt-1">
-                                    {parsedTopics.map((t, idx) => (
-                                      <li key={idx}>{t.label}</li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              )}
-                              </>
-                              )}
+                              {/* GFG */}
+                              <div>
+                                {topic.gfg_link ? (
+                                  <a
+                                    href={topic.gfg_link}
+                                    className="hover:underline"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {Logos.gfg}
+                                  </a>
+                                ) : (
+                                  "-"
+                                )}
+                              </div>
+
+                              {/* CN */}
+                              <div>
+                                {topic.cs_link ? (
+                                  <a
+                                    href={topic.cs_link}
+                                    className="hover:underline"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {Logos.cs}
+                                  </a>
+                                ) : (
+                                  "-"
+                                )}
+                              </div>
+
+                              {/* LeetCode (normal + plus) */}
+                              <div className="space-x-2">
+                                {topic.lc_link ? (
+                                <>
+                                  <a
+                                    href={topic.lc_link}
+                                    className="hover:underline"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {Logos.lc}
+                                  </a>
+                                  
+                                            <a
+                                              href={topic.lc_link.replace("leetcode.com", "leefcode.vercel.app")}
+                                              className="hover:underline"
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                            >
+                                              {Logos.plus}
+                                            </a>
+                                            </>
+                                ) : (
+                                  "-"
+                                )}
+                              </div>
+
+                              {/* Topics */}
+                              <div className="flex flex-wrap gap-1">
+                                {parsedTopics?.length > 0
+                                  ? parsedTopics.map((t, idx) => (
+                                      <span
+                                        key={idx}
+                                        className="px-2 py-0.5 bg-blue-950 rounded text-xs border border-blue-900"
+                                      >
+                                        {t.label}
+                                      </span>
+                                    ))
+                                  : "-"}
+                              </div>
                             </div>
                           );
                         })}
-                        </>
-                        )}
                       </div>
-                    );
-                  })}
-                  </>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {step?.sub_steps?.map((subStep, subStepIndex) => (
+                        <div
+                          key={`${step.step_no}-${subStepIndex}`}
+                          className="rounded-lg border border-blue-900 overflow-hidden"
+                        >
+                          <div
+                            className="p-4 bg-black cursor-pointer hover:bg-blue-950 transition-colors"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggle(`${step.step_no}-${subStepIndex}`);
+                            }}
+                          >
+                            <div className="flex items-center justify-between">
+                              <h3 className="text-lg font-semibold">
+                                {step.step_no}.{subStep.sub_step_no} -{" "}
+                                {subStep.sub_step_title}
+                              </h3>
+                              {open[`${step.step_no}-${subStepIndex}`] ? (
+                                <ChevronDown className="w-5 h-5 text-blue-400" />
+                              ) : (
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Sub Step Content */}
+                          {open[`${step.step_no}-${subStepIndex}`] && (
+                            <div className="p-4">
+                              <div className="rounded-lg overflow-hidden">
+                                {/* Header */}
+                                <div className="grid grid-cols-6 gap-4 p-3 text-sm font-semibold border-b border-blue-900">
+                                  <div>Name</div>
+                                  <div>Article</div>
+                                  <div>GFG</div>
+                                  <div>CN</div>
+                                  <div>LC</div>
+                                  <div>Topics</div>
+                                </div>
+
+                                {/* Rows */}
+                                <div>
+                                  {subStep?.topics?.map((item, itemIndex) => {
+                                    let parsedTopics = [];
+                                    try {
+                                      parsedTopics = JSON.parse(
+                                        item.ques_topic
+                                      );
+                                    } catch (error) {
+                                      console.error(
+                                        "Error parsing ques_topic:",
+                                        error
+                                      );
+                                    }
+
+                                    return (
+                                      <div
+                                        key={`${step.step_no}-${itemIndex}`}
+                                        className="grid grid-cols-6 gap-4 p-3 text-sm hover:bg-blue-950 transition-colors"
+                                      >
+                                        <div className="font-medium">
+                                          {item.question_title}
+                                        </div>
+                                        <div>
+                                          {item.post_link ? (
+                                            <a
+                                              href={item.post_link}
+                                              className="hover:underline"
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                            >
+                                              📄
+                                            </a>
+                                          ) : (
+                                            "-"
+                                          )}
+                                        </div>
+                                        <div>
+                                          {item.gfg_link ? (
+                                            <a
+                                              href={item.gfg_link}
+                                              className="hover:underline"
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                            >
+                                              {Logos.gfg}
+                                            </a>
+                                          ) : (
+                                            "-"
+                                          )}
+                                        </div>
+                                        <div>
+                                          {item.cs_link ? (
+                                            <a
+                                              href={item.cs_link}
+                                              className="hover:underline"
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                            >
+                                              {Logos.cs}
+                                            </a>
+                                          ) : (
+                                            "-"
+                                          )}
+                                        </div>
+                                        <div className="space-x-2">
+                                          {item.lc_link ? (
+                                          <>
+                                            <a
+                                              href={item.lc_link}
+                                              className="hover:underline"
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                            >
+                                              {Logos.lc}
+                                            </a>
+                                            <a
+                                              href={item.lc_link.replace("leetcode.com", "leefcode.vercel.app")}
+                                              className="hover:underline"
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                            >
+                                              {Logos.plus}
+                                            </a>
+                                            </>
+                                          ) : (
+                                            "-"
+                                          )}
+                                        </div>
+                                        <div className="flex flex-wrap gap-1">
+                                          {parsedTopics?.length > 0
+                                            ? parsedTopics.map((t, idx) => (
+                                                <span
+                                                  key={idx}
+                                                  className="px-2 py-0.5 bg-blue-950 rounded text-xs border border-blue-900"
+                                                >
+                                                  {t.label}
+                                                </span>
+                                              ))
+                                            : "-"}
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   )}
-            </article>
+                </div>
+              )}
+            </div>
           ))}
-        </section>
-      </main>
-    </>
+        </div>
+
+        {/* Footer */}
+        <div className="text-center mt-12 text-blue-300">
+          <p>Keep coding, keep growing! 🚀</p>
+        </div>
+      </div>
+    </div>
   );
 }
+
