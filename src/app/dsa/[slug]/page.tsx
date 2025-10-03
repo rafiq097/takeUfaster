@@ -3,12 +3,11 @@ import { useState, useEffect } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useParams } from "next/navigation";
 
-// Logos (you can replace these emojis with SVGs if needed)
 const Logos = {
-  lc: "💻", // LeetCode logo placeholder
-  gfg: "🟢", // GFG
-  cs: "🔵", // CodingNinjas
-  plus: "🐧", // Penguin for LeetCode+
+  lc: "💻",
+  gfg: "🟢",
+  cs: "🔵",
+  plus: "🐧",
 };
 
 export default function Home() {
@@ -159,25 +158,28 @@ export default function Home() {
                               {/* LeetCode (normal + plus) */}
                               <div className="space-x-2">
                                 {topic.lc_link ? (
-                                <>
-                                  <a
-                                    href={topic.lc_link}
-                                    className="hover:underline"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {Logos.lc}
-                                  </a>
-                                  
-                                            <a
-                                              href={topic.lc_link.replace("leetcode.com", "leefcode.vercel.app")}
-                                              className="hover:underline"
-                                              target="_blank"
-                                              rel="noopener noreferrer"
-                                            >
-                                              {Logos.plus}
-                                            </a>
-                                            </>
+                                  <>
+                                    <a
+                                      href={topic.lc_link}
+                                      className="hover:underline"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      {Logos.lc}
+                                    </a>
+
+                                    <a
+                                      href={topic.lc_link.replace(
+                                        "leetcode.com",
+                                        "leefcode.vercel.app"
+                                      )}
+                                      className="hover:underline"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      {Logos.plus}
+                                    </a>
+                                  </>
                                 ) : (
                                   "-"
                                 )}
@@ -309,23 +311,26 @@ export default function Home() {
                                         </div>
                                         <div className="space-x-2">
                                           {item.lc_link ? (
-                                          <>
-                                            <a
-                                              href={item.lc_link}
-                                              className="hover:underline"
-                                              target="_blank"
-                                              rel="noopener noreferrer"
-                                            >
-                                              {Logos.lc}
-                                            </a>
-                                            <a
-                                              href={item.lc_link.replace("leetcode.com", "leefcode.vercel.app")}
-                                              className="hover:underline"
-                                              target="_blank"
-                                              rel="noopener noreferrer"
-                                            >
-                                              {Logos.plus}
-                                            </a>
+                                            <>
+                                              <a
+                                                href={item.lc_link}
+                                                className="hover:underline"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                              >
+                                                {Logos.lc}
+                                              </a>
+                                              <a
+                                                href={item.lc_link.replace(
+                                                  "leetcode.com",
+                                                  "leefcode.vercel.app"
+                                                )}
+                                                className="hover:underline"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                              >
+                                                {Logos.plus}
+                                              </a>
                                             </>
                                           ) : (
                                             "-"
@@ -368,4 +373,3 @@ export default function Home() {
     </div>
   );
 }
-

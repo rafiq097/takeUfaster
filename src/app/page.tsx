@@ -1,14 +1,14 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { 
-  Code2, 
-  BookOpen, 
-  FileText, 
+import {
+  Code2,
+  BookOpen,
+  FileText,
   ChevronRight,
   Database,
   Cpu,
-  Globe
+  Globe,
 } from "lucide-react";
 
 export default function Home() {
@@ -20,22 +20,56 @@ export default function Home() {
   }, []);
 
   const dsaSheets = [
-    { name: "79 Sheet", description: "Essential 79 coding problems", problems: 79, slug: "79" },
-    { name: "SDE Sheet", description: "Software Development Engineer prep", problems: 191, slug: "sde" },
-    { name: "A to Z DSA", description: "Complete DSA roadmap", problems: 450, slug: "a2z" }
+    {
+      name: "79 Sheet",
+      description: "Essential 79 coding problems",
+      problems: 79,
+      slug: "79",
+    },
+    {
+      name: "SDE Sheet",
+      description: "Software Development Engineer prep",
+      problems: 191,
+      slug: "sde",
+    },
+    {
+      name: "A to Z DSA",
+      description: "Complete DSA roadmap",
+      problems: 450,
+      slug: "a2z",
+    },
   ];
 
   const coreSubjects = [
-    { name: "Operating Systems", icon: <Cpu className="w-5 h-5" />, description: "Process, Memory, File Systems", slug: "os" },
-    { name: "Database Management", icon: <Database className="w-5 h-5" />, description: "SQL, Transactions, Indexing", slug: "dbms" },
-    { name: "Computer Networks", icon: <Globe className="w-5 h-5" />, description: "Protocols, OSI, TCP/IP", slug: "cn" }
+    {
+      name: "Operating Systems",
+      icon: <Cpu className="w-5 h-5" />,
+      description: "Process, Memory, File Systems",
+      slug: "os",
+    },
+    {
+      name: "Database Management",
+      icon: <Database className="w-5 h-5" />,
+      description: "SQL, Transactions, Indexing",
+      slug: "dbms",
+    },
+    {
+      name: "Computer Networks",
+      icon: <Globe className="w-5 h-5" />,
+      description: "Protocols, OSI, TCP/IP",
+      slug: "cn",
+    },
   ];
 
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="relative">
         {/* Header */}
-        <header className={`transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0'}`}>
+        <header
+          className={`transition-all duration-1000 ${
+            isLoaded ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"
+          }`}
+        >
           <nav className="container mx-auto px-6 py-8">
             <div className="flex items-center justify-center">
               <div className="flex items-center space-x-3">
@@ -51,20 +85,23 @@ export default function Home() {
         </header>
 
         {/* Hero Section */}
-        <section className={`container mx-auto px-6 py-16 text-center transition-all duration-1000 delay-200 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <section
+          className={`container mx-auto px-6 py-16 text-center transition-all duration-1000 delay-200 ${
+            isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          }`}
+        >
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
             Master Your
-            <span className="block text-blue-400">
-              Coding Journey
-            </span>
+            <span className="block text-blue-400">Coding Journey</span>
           </h1>
           <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Comprehensive DSA sheets and core CS subjects to accelerate your learning and interview preparation.
+            Comprehensive DSA sheets and core CS subjects to accelerate your
+            learning and interview preparation.
           </p>
-          
+
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button 
+            <button
               onClick={() => router.push("/dsa")}
               className="px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-300 flex items-center space-x-3 transform hover:scale-105"
             >
@@ -72,8 +109,8 @@ export default function Home() {
               <span className="text-lg font-semibold">DSA Sheets</span>
               <ChevronRight className="w-5 h-5" />
             </button>
-            
-            <button 
+
+            <button
               onClick={() => router.push("/core")}
               className="px-8 py-4 border-2 border-blue-600 text-blue-400 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300 flex items-center space-x-3 transform hover:scale-105"
             >
@@ -85,17 +122,23 @@ export default function Home() {
         </section>
 
         {/* DSA Sheets Section */}
-        <section className={`container mx-auto px-6 py-16 transition-all duration-1000 delay-400 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <section
+          className={`container mx-auto px-6 py-16 transition-all duration-1000 delay-400 ${
+            isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          }`}
+        >
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 text-blue-400">
               DSA Problem Sheets
             </h2>
-            <p className="text-gray-400 text-lg">Curated problem sets for structured learning</p>
+            <p className="text-gray-400 text-lg">
+              Curated problem sets for structured learning
+            </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {dsaSheets.map((sheet, index) => (
-              <div 
+              <div
                 key={index}
                 className="p-6 border border-gray-800 rounded-xl hover:border-blue-600 transition-all duration-300 cursor-pointer group transform hover:scale-105"
                 onClick={() => router.push(`/dsa/${sheet.slug}`)}
@@ -104,15 +147,23 @@ export default function Home() {
                   <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
                     {sheet.name}
                   </h3>
-                  <p className="text-gray-400 text-sm mb-3">{sheet.description}</p>
+                  <p className="text-gray-400 text-sm mb-3">
+                    {sheet.description}
+                  </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-blue-400 font-medium">{sheet.problems} Problems</span>
+                    <span className="text-blue-400 font-medium">
+                      {sheet.problems} Problems
+                    </span>
                     <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 group-hover:translate-x-1 transition-all duration-300" />
                   </div>
                 </div>
                 <div className="flex space-x-2">
-                  <span className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs">Sheets</span>
-                  <span className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs">Articles</span>
+                  <span className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs">
+                    Sheets
+                  </span>
+                  <span className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs">
+                    Articles
+                  </span>
                 </div>
               </div>
             ))}
@@ -120,17 +171,23 @@ export default function Home() {
         </section>
 
         {/* Core Subjects Section */}
-        <section className={`container mx-auto px-6 py-16 transition-all duration-1000 delay-600 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <section
+          className={`container mx-auto px-6 py-16 transition-all duration-1000 delay-600 ${
+            isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          }`}
+        >
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 text-blue-400">
               Core Computer Science
             </h2>
-            <p className="text-gray-400 text-lg">Essential subjects for technical interviews</p>
+            <p className="text-gray-400 text-lg">
+              Essential subjects for technical interviews
+            </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {coreSubjects.map((subject, index) => (
-              <div 
+              <div
                 key={index}
                 className="p-6 border border-gray-800 rounded-xl hover:border-blue-600 transition-all duration-300 cursor-pointer group transform hover:scale-105"
                 onClick={() => router.push(`/core/${subject.slug}`)}
@@ -143,11 +200,17 @@ export default function Home() {
                     {subject.name}
                   </h3>
                 </div>
-                <p className="text-gray-400 text-sm mb-4">{subject.description}</p>
+                <p className="text-gray-400 text-sm mb-4">
+                  {subject.description}
+                </p>
                 <div className="flex items-center justify-between">
                   <div className="flex space-x-2">
-                    <span className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs">Notes</span>
-                    <span className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs">Articles</span>
+                    <span className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs">
+                      Notes
+                    </span>
+                    <span className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs">
+                      Articles
+                    </span>
                   </div>
                   <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 group-hover:translate-x-1 transition-all duration-300" />
                 </div>
@@ -157,7 +220,11 @@ export default function Home() {
         </section>
 
         {/* Stats Section */}
-        <section className={`container mx-auto px-6 py-16 transition-all duration-1000 delay-800 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <section
+          className={`container mx-auto px-6 py-16 transition-all duration-1000 delay-800 ${
+            isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          }`}
+        >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             <div className="text-center p-6 border border-gray-800 rounded-xl">
               <div className="text-3xl font-bold text-blue-400 mb-2">720+</div>
@@ -179,17 +246,21 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className={`container mx-auto px-6 py-12 text-center border-t border-gray-800 mt-16 transition-all duration-1000 delay-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <footer
+          className={`container mx-auto px-6 py-12 text-center border-t border-gray-800 mt-16 transition-all duration-1000 delay-1000 ${
+            isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          }`}
+        >
           <div className="mb-8">
             <div className="flex items-center justify-center space-x-3 mb-4">
               <div className="p-2 bg-blue-600 rounded-lg">
                 <Code2 className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-blue-400">
-                takeUfaster
-              </h3>
+              <h3 className="text-xl font-bold text-blue-400">takeUfaster</h3>
             </div>
-            <p className="text-gray-400 mb-6">Accelerating your coding journey</p>
+            <p className="text-gray-400 mb-6">
+              Accelerating your coding journey
+            </p>
           </div>
           <div className="text-gray-600 text-sm">
             © 2025 takeUfaster. All rights reserved.

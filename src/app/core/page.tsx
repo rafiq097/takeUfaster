@@ -1,8 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { 
-  BookOpen, 
+import {
+  BookOpen,
   ChevronRight,
   Clock,
   Target,
@@ -12,7 +12,7 @@ import {
   Star,
   Cpu,
   Database,
-  Globe
+  Globe,
 } from "lucide-react";
 
 export default function CorePage() {
@@ -28,59 +28,89 @@ export default function CorePage() {
       id: "os",
       name: "Operating Systems",
       icon: <Cpu className="w-8 h-8" />,
-      description: "Master the core concepts of operating systems including processes, memory management, and file systems",
+      description:
+        "Master the core concepts of operating systems including processes, memory management, and file systems",
       topics: 45,
       difficulty: "Intermediate",
       timeToComplete: "3-4 weeks",
       bestFor: "System programming, OS internals understanding",
-      keyTopics: ["Process Management", "Memory Management", "File Systems", "Synchronization", "Deadlocks", "CPU Scheduling", "I/O Systems", "Security"],
+      keyTopics: [
+        "Process Management",
+        "Memory Management",
+        "File Systems",
+        "Synchronization",
+        "Deadlocks",
+        "CPU Scheduling",
+        "I/O Systems",
+        "Security",
+      ],
       features: [
         "Process and thread management concepts",
         "Memory allocation and virtual memory",
         "File system organization and management",
-        "Synchronization and concurrency control"
+        "Synchronization and concurrency control",
       ],
       importance: "System Design",
-      companies: ["Microsoft", "Google", "Amazon", "Apple"]
+      companies: ["Microsoft", "Google", "Amazon", "Apple"],
     },
     {
       id: "dbms",
       name: "Database Management Systems",
       icon: <Database className="w-8 h-8" />,
-      description: "Comprehensive coverage of database concepts, SQL, transactions, and database design principles",
+      description:
+        "Comprehensive coverage of database concepts, SQL, transactions, and database design principles",
       topics: 52,
       difficulty: "Beginner to Advanced",
       timeToComplete: "4-5 weeks",
       bestFor: "Backend development, data engineering interviews",
-      keyTopics: ["SQL Queries", "Database Design", "Normalization", "Indexing", "Transactions", "ACID Properties", "Concurrency Control", "Query Optimization"],
+      keyTopics: [
+        "SQL Queries",
+        "Database Design",
+        "Normalization",
+        "Indexing",
+        "Transactions",
+        "ACID Properties",
+        "Concurrency Control",
+        "Query Optimization",
+      ],
       features: [
         "Complete SQL query mastery",
         "Database design and normalization",
         "Transaction management and ACID properties",
-        "Performance optimization techniques"
+        "Performance optimization techniques",
       ],
       importance: "Backend Essential",
-      companies: ["Oracle", "Microsoft", "Amazon", "Meta"]
+      companies: ["Oracle", "Microsoft", "Amazon", "Meta"],
     },
     {
       id: "cn",
       name: "Computer Networks",
       icon: <Globe className="w-8 h-8" />,
-      description: "Deep dive into networking protocols, OSI model, TCP/IP, and modern network architectures",
+      description:
+        "Deep dive into networking protocols, OSI model, TCP/IP, and modern network architectures",
       topics: 38,
       difficulty: "Intermediate to Advanced",
-      timeToComplete: "3-4 weeks", 
+      timeToComplete: "3-4 weeks",
       bestFor: "Network engineering, distributed systems",
-      keyTopics: ["OSI Model", "TCP/IP Protocol", "HTTP/HTTPS", "DNS", "Routing Algorithms", "Network Security", "Socket Programming", "Network Topologies"],
+      keyTopics: [
+        "OSI Model",
+        "TCP/IP Protocol",
+        "HTTP/HTTPS",
+        "DNS",
+        "Routing Algorithms",
+        "Network Security",
+        "Socket Programming",
+        "Network Topologies",
+      ],
       features: [
         "Protocol stack understanding",
-        "Network security fundamentals", 
+        "Network security fundamentals",
         "Routing and switching concepts",
-        "Modern web protocols and APIs"
+        "Modern web protocols and APIs",
       ],
       importance: "System Architecture",
-      companies: ["Cisco", "Google", "Amazon", "Cloudflare"]
-    }
+      companies: ["Cisco", "Google", "Amazon", "Cloudflare"],
+    },
   ];
 
   const handleSubjectClick = (subjectId) => {
@@ -90,7 +120,11 @@ export default function CorePage() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <header className={`transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0'}`}>
+      <header
+        className={`transition-all duration-1000 ${
+          isLoaded ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"
+        }`}
+      >
         <nav className="container mx-auto px-6 py-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -98,11 +132,13 @@ export default function CorePage() {
                 <BookOpen className="w-8 h-8" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-blue-400">takeUfaster</h1>
+                <h1 className="text-2xl font-bold text-blue-400">
+                  takeUfaster
+                </h1>
                 <p className="text-gray-400 text-sm">Core Computer Science</p>
               </div>
             </div>
-            <button 
+            <button
               onClick={() => router.push("/")}
               className="text-gray-400 hover:text-blue-400 transition-colors"
             >
@@ -113,18 +149,27 @@ export default function CorePage() {
       </header>
 
       {/* Hero Section */}
-      <section className={`container mx-auto px-6 py-12 text-center transition-all duration-1000 delay-200 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+      <section
+        className={`container mx-auto px-6 py-12 text-center transition-all duration-1000 delay-200 ${
+          isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}
+      >
         <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
           Core Computer
           <span className="block text-blue-400">Science</span>
         </h1>
         <p className="text-xl text-gray-400 mb-8 max-w-3xl mx-auto">
-          Master the fundamental concepts that form the backbone of computer science and software engineering
+          Master the fundamental concepts that form the backbone of computer
+          science and software engineering
         </p>
       </section>
 
       {/* Subjects Grid */}
-      <section className={`container mx-auto px-6 py-16 transition-all duration-1000 delay-400 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+      <section
+        className={`container mx-auto px-6 py-16 transition-all duration-1000 delay-400 ${
+          isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}
+      >
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {subjects.map((subject, index) => (
             <div
@@ -155,11 +200,15 @@ export default function CorePage() {
               {/* Stats */}
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center p-3 bg-black/50 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-400">{subject.topics}</div>
+                  <div className="text-2xl font-bold text-blue-400">
+                    {subject.topics}
+                  </div>
                   <div className="text-gray-400 text-xs">Topics</div>
                 </div>
                 <div className="text-center p-3 bg-black/50 rounded-lg">
-                  <div className="text-sm font-semibold text-white">{subject.timeToComplete}</div>
+                  <div className="text-sm font-semibold text-white">
+                    {subject.timeToComplete}
+                  </div>
                   <div className="text-gray-400 text-xs">Duration</div>
                 </div>
               </div>
@@ -169,26 +218,39 @@ export default function CorePage() {
                 <div>
                   <div className="flex items-center space-x-2 mb-2">
                     <Target className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm font-medium text-gray-300">Best For:</span>
+                    <span className="text-sm font-medium text-gray-300">
+                      Best For:
+                    </span>
                   </div>
-                  <p className="text-sm text-gray-400 pl-6">{subject.bestFor}</p>
+                  <p className="text-sm text-gray-400 pl-6">
+                    {subject.bestFor}
+                  </p>
                 </div>
 
                 <div>
                   <div className="flex items-center space-x-2 mb-2">
                     <TrendingUp className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm font-medium text-gray-300">Difficulty:</span>
+                    <span className="text-sm font-medium text-gray-300">
+                      Difficulty:
+                    </span>
                   </div>
-                  <p className="text-sm text-gray-400 pl-6">{subject.difficulty}</p>
+                  <p className="text-sm text-gray-400 pl-6">
+                    {subject.difficulty}
+                  </p>
                 </div>
               </div>
 
               {/* Key Topics */}
               <div className="mb-6">
-                <h4 className="text-sm font-medium text-gray-300 mb-3">Key Topics:</h4>
+                <h4 className="text-sm font-medium text-gray-300 mb-3">
+                  Key Topics:
+                </h4>
                 <div className="flex flex-wrap gap-2">
                   {subject.keyTopics.slice(0, 4).map((topic, idx) => (
-                    <span key={idx} className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs">
+                    <span
+                      key={idx}
+                      className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs"
+                    >
                       {topic}
                     </span>
                   ))}
@@ -202,10 +264,15 @@ export default function CorePage() {
 
               {/* Features */}
               <div className="mb-6">
-                <h4 className="text-sm font-medium text-gray-300 mb-3">What You'll Learn:</h4>
+                <h4 className="text-sm font-medium text-gray-300 mb-3">
+                  What You'll Learn:
+                </h4>
                 <ul className="space-y-2">
                   {subject.features.slice(0, 3).map((feature, idx) => (
-                    <li key={idx} className="flex items-center space-x-2 text-sm text-gray-400">
+                    <li
+                      key={idx}
+                      className="flex items-center space-x-2 text-sm text-gray-400"
+                    >
                       <CheckCircle className="w-3 h-3 text-blue-400 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
@@ -215,10 +282,15 @@ export default function CorePage() {
 
               {/* Companies */}
               <div className="mb-6">
-                <h4 className="text-sm font-medium text-gray-300 mb-2">Asked by:</h4>
+                <h4 className="text-sm font-medium text-gray-300 mb-2">
+                  Asked by:
+                </h4>
                 <div className="flex flex-wrap gap-1">
                   {subject.companies.map((company, idx) => (
-                    <span key={idx} className="px-2 py-1 bg-blue-600/20 text-blue-400 rounded text-xs">
+                    <span
+                      key={idx}
+                      className="px-2 py-1 bg-blue-600/20 text-blue-400 rounded text-xs"
+                    >
                       {company}
                     </span>
                   ))}
@@ -226,7 +298,7 @@ export default function CorePage() {
               </div>
 
               {/* CTA Button */}
-              <button 
+              <button
                 onClick={() => handleSubjectClick(subject.id)}
                 className="w-full flex items-center justify-center space-x-2 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-blue-500/25"
               >
@@ -239,39 +311,64 @@ export default function CorePage() {
       </section>
 
       {/* Info Section */}
-      <section className={`container mx-auto px-6 py-16 transition-all duration-1000 delay-600 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+      <section
+        className={`container mx-auto px-6 py-16 transition-all duration-1000 delay-600 ${
+          isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}
+      >
         <div className="bg-gray-900/50 rounded-2xl p-8 border border-gray-800">
-          <h2 className="text-2xl font-bold text-blue-400 mb-6 text-center">Why Master Core CS Subjects?</h2>
+          <h2 className="text-2xl font-bold text-blue-400 mb-6 text-center">
+            Why Master Core CS Subjects?
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="p-3 bg-blue-600/20 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
                 <Users className="w-6 h-6 text-blue-400" />
               </div>
-              <h3 className="font-semibold text-white mb-2">Interview Essential</h3>
-              <p className="text-gray-400 text-sm">Core subjects are frequently tested in technical interviews at top companies</p>
+              <h3 className="font-semibold text-white mb-2">
+                Interview Essential
+              </h3>
+              <p className="text-gray-400 text-sm">
+                Core subjects are frequently tested in technical interviews at
+                top companies
+              </p>
             </div>
             <div className="text-center">
               <div className="p-3 bg-blue-600/20 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
                 <Star className="w-6 h-6 text-blue-400" />
               </div>
-              <h3 className="font-semibold text-white mb-2">Foundation Building</h3>
-              <p className="text-gray-400 text-sm">Strong fundamentals in OS, DBMS, and Networks are crucial for system design</p>
+              <h3 className="font-semibold text-white mb-2">
+                Foundation Building
+              </h3>
+              <p className="text-gray-400 text-sm">
+                Strong fundamentals in OS, DBMS, and Networks are crucial for
+                system design
+              </p>
             </div>
             <div className="text-center">
               <div className="p-3 bg-blue-600/20 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
                 <Clock className="w-6 h-6 text-blue-400" />
               </div>
               <h3 className="font-semibold text-white mb-2">Career Growth</h3>
-              <p className="text-gray-400 text-sm">Deep knowledge in core subjects opens doors to senior engineering roles</p>
+              <p className="text-gray-400 text-sm">
+                Deep knowledge in core subjects opens doors to senior
+                engineering roles
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className={`container mx-auto px-6 py-16 transition-all duration-1000 delay-800 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+      <section
+        className={`container mx-auto px-6 py-16 transition-all duration-1000 delay-800 ${
+          isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}
+      >
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-blue-400 mb-8">Complete Coverage</h2>
+          <h2 className="text-3xl font-bold text-blue-400 mb-8">
+            Complete Coverage
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="p-6 border border-gray-800 rounded-xl">
               <div className="text-3xl font-bold text-blue-400 mb-2">135+</div>
@@ -296,7 +393,8 @@ export default function CorePage() {
       {/* Footer */}
       <footer className="container mx-auto px-6 py-12 text-center border-t border-gray-800 mt-16">
         <div className="text-gray-400">
-          Build a strong foundation in computer science fundamentals. Choose a subject and start learning!
+          Build a strong foundation in computer science fundamentals. Choose a
+          subject and start learning!
         </div>
       </footer>
     </div>
